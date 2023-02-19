@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create Articale</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+
+<body>
+
+  @include('partials/navbar')
+  <form action="{{route('news_update',[articale.slug])}}?_method=PATCH" method="POST">
+    <h1>Edit Articales</h1>
+    {{ csrfField() }}
+
+    <input type="text" name="title" placeholder="Articale title" value="{{ articale.title }}">
+    @if(flashMessages.has('errors.title'))
+    <p> {{ flashMessages.get('errors.title') }} </p>
+    @end
+
+    <input type="file" name="image" id="" placeholder="Image">
+    @if(flashMessages.has('errors.image'))
+    <p> {{ flashMessages.get('errors.image') }} </p>
+    @end
+
+    <textarea name="content" id="" cols="30" rows="10"
+      placeholder="Enter Your Content">{{ articale.content }}</textarea>
+    @if(flashMessages.has('errors.content'))
+    <p> {{ flashMessages.get('errors.content') }} </p>
+    @end
+
+    <button type="submit">Update</button>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
